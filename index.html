@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>hmh-reason-talk</title>
+<link rel=stylesheet href="styles/lagom.css">
+<style>
+  h1, h2, h3, h4 {
+    font-family: helvetica;
+    font-weight: bold;
+    color: #db4d3f
+  }
+  .red {
+    color: #db4d3f
+  }
+  .black {
+    color: #000;
+  }
+</style>
+
+<header> ◩ | hmh-reason-talk </header>
+<!-- 1 -->
+<section>
+  <big>
+    <img src="img/logo.png">
+  </big>
+  <h1 class="black">A Brief Intro</h1>
+</section>
+<!-- 2 -->
+<section>
+  <h1>What is it?</h1>
+  <br />
+  <p>A new C-like syntax and toolchain for OCaml</p>
+</section>
+<!-- 3 -->
+<section>
+  <big>
+    <big>
+      <img src="//media0.giphy.com/media/11H5ftRLPFeL16/giphy.gif">
+    </big>
+  </big>
+  <p>sorry...</p>
+</section>
+<!-- 4 -->
+<section>
+  <h1>What is OCaml?</h1>
+  <br />
+  <p>An old-ish functional language</p>
+  <!-- # also supports mutability and oop patterns -->
+  <p>Used in academia and the financial industry</p>
+  <!-- # invented in 1996 by a group of french academics  -->
+  <p>Facebook seem to like it - Hack, Flow</p>
+  <!-- # Hack is facebooks own typed version of PHP and Flow is a type checker for JS -->
+</section>
+<!-- 5 -->
+<section>
+  <h1>... and ???</h1>
+  <br />
+  <p>It has safe static types - <i>"Lisp with types"</i></p>
+  <p>It compiles to bytecode and native code</p>
+  <!-- bytecode is code that will run on a virtual machine -->
+  <p>...and it compiles to JavaScript - very quickly</p>
+  <!-- via Bucklescript -->
+</section>
+<!-- 6 -->
+<section>
+  <!-- # If we want those language features and it compiles to JS -->
+  <h1>So why not just use OCaml?</h1>
+  <br />
+  <p>Unfamiliar syntax for most devs</p>
+  <p>Steep learning curve</p>
+  <p>Not popular in Web/mobile communities</p>
+</section>
+<!-- 7 -->
+<section>
+  <big>
+    <img src="//media3.giphy.com/media/3oz8xM5Opwl0i60Kf6/giphy.gif">
+  </big>
+  <!-- # Facebook tried to get poeple to adopt the language because of its features, but the syntax was just too much -->
+</section>
+<!-- 8 -->
+<section>
+  <h1>So...Reason?</h1>
+  <br />
+  <p>
+    <i>
+      "Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems" -
+      <a href=https://reasonml.github.io/>reasonml.github.io</a>
+    </i>
+  </p>
+  <br />
+  <p>All of the properties of OCaml but with a syntax that is more familiar to JavaScript developers</p>
+  <p>A more gentle learning curve but with the same power and safety</p>
+</section>
+<!-- 9 -->
+<section>
+  <big>
+    <img src="//media3.giphy.com/media/OVtqvymKkkcTu/giphy.gif">
+  </big>
+</section>
+<!-- 10 -->
+<section>
+  <h2>let binding</h2>
+  <code>
+    let greeting = "hello!";
+    let score = 10;
+    let newScore = 10 + score;
+  </code>
+</section>
+<!-- 11 -->
+<section>
+  <h2>block scope</h2>
+  <code>
+    if (enjoy) {
+      let message = "Enjoying yourselves so far?";
+      print_endline(message)
+    };
+    /* `message` not accessible here! */
+  </code>
+</section>
+<!-- 12 -->
+<section>
+  <h2>functions</h2>
+  <code>
+    let add = (x, y) => x + y;
+    let sum = add(3, 4);
+  </code>
+</section>
+<!-- 13 -->
+<section>
+  <h2>variants</h2>
+  <code>
+    /* Defining a variant type */
+    type colour = Red | Green | Blue | Black | White;
+  </code>
+</section>
+<!-- 14 -->
+<section>
+  <h2>switch</h2>
+  <code>
+    /* A function that switches over a variant type */
+    let getHexCode(c: colour) =>
+      switch (c) {
+      | Red => "#FF0000"
+      | Green => "#00FF00"
+      | Blue => "#0000FF",
+      | Black => "#000000",
+      | White => "#FFFFFF"
+      };
+
+    /* Calling getHexCode() */
+    getHexCode(Blue); /* returns "#0000FF" */
+    getHexCode(Yellow); /* will cause your code not to compile */
+  </code>
+</section>
+<!-- 15 -->
+<section>
+  <h1>types</h1>
+  <br />
+  <p>JavaScript is a dynamically typed language</p>
+  <i>it knows the types of values at run time</i>
+  <br />
+  <p>Reason is a statically typed language</p>
+  <i>it knows the types of values at compile time</i>
+</section>
+<!-- 16 -->
+<section>
+  <big>
+    <big>
+      <img src="//www.reactiongifs.com/r/2013/10/tim-and-eric-mind-blown.gif">
+    </big>
+    <p>no runtime errors???</p>
+    <!-- could console.logs and debuggers statements become a thing of the past? -->
+  </big>
+</section>
+<!-- 17 -->
+<section>
+  <h2>types</h2>
+  <br />
+  <code>
+    let score = 10;
+  </code>
+  <p>types can be <i>inferred</i></p>
+  <!-- Reason knows that score is an int -->
+  <p>Every piece of Reason code has a type</p>
+</section>
+<!-- 18 -->
+<section>
+  <h2>types</h2>
+  <br />
+  <p>The type system is completely "sound"</p>
+  <br />
+  <!-- #This means that, as long as your code compiles fine, every type guarantees that it's there. 
+    just because the type says it's -->
+  <p>In a conventional, best-effort type systems like TypeScript, we can declare things like:</p>
+  <i>"an integer that's never null"</i>
+  <br />
+  <p>But this doesn't mean it's actually never null.
+    In contrast, a pure Reason program has no null bugs</p>
+    <!-- #because it is caught by the compiler -->
+</section>
+  <!-- 19 -->
+  <section>
+      <h2>language features</h2>
+      <br />
+      <big>
+        <img src="img/basics-1.png">
+      </big>
+  </section>
+  <!-- 20 -->
+  <section>
+      <h2>language features</h2>
+      <big>
+        <img src="img/basics-2.png">
+      </big>
+  </section>
+<!-- 21 -->
+<section>
+    <h2>records</h2>
+    <br />
+    <p>Records are like JavaScript objects but are:</p>
+    <ul>
+      <li>immutable by default</li>
+      <li>more rigidly typed</li>
+      <li>fixed in field names and types</li>
+      <li>faster and lighter</li>
+    </ul>
+</section>
+<!-- 22 -->
+<section>
+    <h2>records</h2>
+    <br />
+    <code>
+    /* declare type */
+    type animal = {
+      age: int,
+      name: string
+    };
+
+    /* declare a value (type animal is inferred) */
+    let horse = {
+      age: 55,
+      name: "Mr. Ed"
+    };
+
+    /* Destructuring like es6 */
+    let {age, name} = horse;
+    </code>
+</section>
+<!-- 23 -->
+<section>
+  <h2>What about JavaScript?</h2>
+  <br />
+  <p>You can make calls to JS functions...</p>
+  <code>
+  Js.log("Hello, BuckleScript and Reason!"); /* console.log(...) */
+  </code>
+  <p>...or directly write JS in the Reason code through Bucklescript (bs.raw):</p>
+  <code>
+  let x: string = [%bs.raw {| 'well-typed' |}];
+  Js.log(x);
+      
+  let timesTwo: int => int = [%bs.raw {|
+    function(x) { return x * 2; }
+  |}];
+  Js.log(timesTwo(5));
+  </code>
+  <p>That means access to all familiar APIs and npm modules</p>
+</section>
+<!-- 23 -->
+<section>
+    <h2>What about React?</h2>
+    <br />
+    <p><i>ReasonML addresses the biggest problems that I’ve observed in building UI applications over the last five years, and opens up a language/compiler toolchain that is incredibly well suited to React’s model of rendering UI.</i></p>
+    <p>— Jordan Walke (creator of ReactJS)</p>
+  </section>
+  <section>
+    <h2>JSX</h2>
+    <br />
+    <code>
+    <MyComponent myProp={someState} />
+    </code>
+    <p>becomes:</p>
+    <code>
+    ([@JSX] MyComponent.make(~myProp=someState, ~children=[], ()));
+    </code>
+  </section>
+
+  <section>
+      <h2>ReasonReact</h2>
+      <br />
+      <code>
+      let component = ReasonReact.statelessComponent("Greeting");
+
+      let make = (~name, _children) => {
+        ...component,
+        render: _self =>
+        <button>
+          {ReasonReact.stringToElement("Hello!")}
+        </button>
+      };
+      </code>
+    </section>
+
+    <section>
+        <h2>Useful Links</h2>
+        <br />
+        <p><a href="//reasonml.github.io/">Reason Docs</a></p>
+        <p><a href="//reasonml.github.io/reason-react/">ReasonReact Docs</a></p>
+        <p><a href="//reasonmlhub.com/exploring-reasonml/toc.html">Exploring Reason Ebook</a></p>
+        <p><a href="//www.youtube.com/watch?v=_0T5OSSzxms">Taming the Meta-Language - Cheng Lou</a></p>
+    </section>
+
+<section>
+  <big>
+    <big>
+      <img src="//media2.giphy.com/media/KJ1f5iTl4Oo7u/giphy.gif">
+    </big>
+  </big>
+</section>
+
+<section>
+  <small>
+
+    <!-- please leave this here <3 -->
+    <p>created with
+      <a href="https://reimertz.github.io/lagom">lagom.js</a>
+    </p>
+  </small>
+</section>
+<script src="scripts/lagom.js"></script>
